@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         pkg-config \
         libssl-dev \
         librabbitmq-dev \
-        wget
+        wget \
     && docker-php-ext-install \
         zip \
         intl \
@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         pdo pdo_mysql
 
 RUN pecl install amqp
+RUN docker-php-ext-enable amqp
 
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 COPY ./ /var/www

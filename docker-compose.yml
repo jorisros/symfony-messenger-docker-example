@@ -13,7 +13,9 @@ services:
       - php
 
   php:
-    image: php:7.4-fpm
+    build:
+      context: ./.docker
+      dockerfile: Dockerfile-php
     volumes:
       - ./:/var/www:cached
     links:
@@ -30,5 +32,6 @@ services:
     volumes:
       - ./:/var/www:cached
     ports: []
+    restart: on-failure
     links:
       - rabbitmq

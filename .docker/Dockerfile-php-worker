@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         pdo pdo_mysql
 
 RUN pecl install amqp
+RUN docker-php-ext-enable amqp
 
 RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
@@ -31,4 +32,4 @@ RUN  mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 COPY ./ /var/www
 WORKDIR /var/www/
 
-CMD [ "symfony run -d", "symfony console messenger:consume async" ]
+CMD ["symfony", "console", "messenger:consume", "async"]
