@@ -22,3 +22,13 @@ services:
   rabbitmq:
     image: rabbitmq:3.7-management
     ports: [5672, 15672]
+
+  worker:
+    build:
+      context: ./.docker
+      dockerfile: Dockerfile-php-worker
+    volumes:
+      - ./:/var/www:cached
+    ports: []
+    links:
+      - rabbitmq
